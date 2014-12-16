@@ -1,4 +1,4 @@
-This directory includes the tests for:
+This repository contains the tests for:
 
 G. van Valkenhoef and T. Tervonen: Entropy-optimal weight constraint elicitation with additive multi-attribute utility models
 
