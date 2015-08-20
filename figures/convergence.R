@@ -32,14 +32,17 @@ data.all <- as.data.frame(data.all)
 data.all$dim.cat <- as.factor(data.all$dim)
 data.all$dim.ninv <- data.all$dim * data.all$ninv
 lmfit <- lm(h ~ 0 + dim.cat + dim.ninv, as.data.frame(data.all))
+print(lmfit)
 
 pdf('../graphics/convergence.pdf')
 
 par(mfrow=c(3,3))
+par(mar=c(2,3,2,1)+0.1)
 
 for (i in 4:12) {
   data.this <- data[[i-2]]
-  boxplot(h~n, data=data.this, sub=paste("n =", i), ylim=c(0.99*min(data.this[,'h']),max(data.this[,'h'])))
+  boxplot(h~n, data=data.this, ylim=c(0.99*min(data.this[,'h']),max(data.this[,'h'])))
+  mtext(paste("n =", i))
   prediction <- sapply(N.planes, function(n) {
     predict(lmfit, newdata=data.frame(dim.cat=factor(as.character(i), levels=levels(data.all$dim.cat)), dim.ninv=i/n^(1/5), ninv=1/n^(1/5)), interval="prediction")
   })

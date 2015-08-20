@@ -13,6 +13,4 @@ cuts <- get.cuts(thrombo$w.exact, opts$cuts, thrombo$meas, opts$planes,
                      entropy=smaa.entropy.choice),
                  sample.planes=sample.planes.unrestricted.shakeandbake())
 
-fname <- gsub(".rds", paste0(".seed.", args[2], ".rds"), args[1])
-
-saveRDS(cuts, fname)
+saveRDS(cuts, args[1])

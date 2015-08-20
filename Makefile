@@ -35,6 +35,10 @@ schedule-convergence-entropies:
 schedule-compare:
 	qsub -d . schedule-compare.pbs
 
+data/thrombo-voluprob.rds: run/thrombo-opts.R data/thrombo-problem.rds
+
+data/thrombo-restricted.rds: run/thrombo-opts.R data/thrombo-problem.rds
+
 ## Here end the final tests ##
 
 data/%.rds: run/%.R lib/elicitation.so
@@ -50,8 +54,6 @@ data/random-restricted.rds: run/random-restricted.R lib/elicitation.so
 	R --vanilla --file=$< --args $@ ${SEED} ${N} ${K}
 
 data/thrombo-equiprob.rds: run/thrombo-opts.R data/thrombo-problem.rds
-data/thrombo-voluprob.rds: run/thrombo-opts.R data/thrombo-problem.rds
-data/thrombo-restricted.rds: run/thrombo-opts.R data/thrombo-problem.rds
 
 ../graphics/%.pdf: figures/%.R
 	R --vanilla --file=$< --args $@ || rm $@
